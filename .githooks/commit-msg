@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Rejects commit messages that reference AI coding tools or include
+# Co-authored-by trailers for them. Enable with:
+#   git config core.hooksPath .githooks
+set -euo pipefail
+
+commit_msg_file="$1"
+commit_msg="$(cat "$commit_msg_file")"
+
+forbidden_pattern='(Co-authored-by|Claude|Anthropic|Codebuff|Cursor|Generated with)'
+
+if printf '%s' "$commit_msg" | grep -Eiq "$forbidden_pattern"; then
+  echo "commit-msg hook: commit message must not reference AI tools or contain a Co-authored-by trailer for one." >&2
+  exit 1
+fi

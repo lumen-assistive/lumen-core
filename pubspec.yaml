@@ -1,0 +1,24 @@
+name: lumen_core
+description: >-
+  Lumen senses engine: the event bus, model registry and plugin manager
+  implementation shared by every Lumen module.
+version: 0.1.0
+publish_to: none
+repository: https://github.com/lumen-assistive/lumen-core
+issue_tracker: https://github.com/lumen-assistive/lumen-core/issues
+homepage: https://github.com/lumen-assistive/lumen-core
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  lumen_sdk:
+    git:
+      url: https://github.com/lumen-assistive/lumen-sdk.git
+      ref: v0.1.0
+  meta: ^1.15.0
+  pub_semver: ^2.1.4
+
+dev_dependencies:
+  lints: ^4.0.0
+  test: ^1.25.0

@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  dart-ci:
+    uses: lumen-assistive/.github/.github/workflows/reusable-dart-ci.yml@main
+    with:
+      working-directory: "."
+      target: "dart"
+
+  content-guard:
+    uses: lumen-assistive/.github/.github/workflows/reusable-content-guard.yml@main
