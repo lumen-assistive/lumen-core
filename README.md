@@ -1,7 +1,5 @@
 # lumen_core
 
-[Italiano](README.it.md) | English
-
 The senses engine for [Lumen](https://github.com/lumen-assistive): the
 implementation of the contracts defined in
 [`lumen_sdk`](https://github.com/lumen-assistive/lumen-sdk).
