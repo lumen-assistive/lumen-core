@@ -70,9 +70,9 @@ void main() {
       final manager = _buildManager();
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'vedere',
+          id: 'vision',
           nameIt: 'Vedere',
-          nameEn: 'See',
+          nameEn: 'Vision',
           version: '1.0.0',
           sdkConstraint: '^0.1.0',
           capabilities: [],
@@ -82,17 +82,17 @@ void main() {
       await manager.register(plugin);
 
       expect(plugin.calls, ['initialize']);
-      expect(manager.stateOf('vedere'), PluginState.initialized);
-      expect(manager.registeredPluginIds, ['vedere']);
+      expect(manager.stateOf('vision'), PluginState.initialized);
+      expect(manager.registeredPluginIds, ['vision']);
     });
 
     test('register rejects an incompatible sdk constraint', () async {
       final manager = _buildManager();
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'vedere',
+          id: 'vision',
           nameIt: 'Vedere',
-          nameEn: 'See',
+          nameEn: 'Vision',
           version: '1.0.0',
           sdkConstraint: '^9.0.0',
           capabilities: [],
@@ -103,15 +103,15 @@ void main() {
         manager.register(plugin),
         throwsA(isA<PluginCompatibilityError>()),
       );
-      expect(manager.stateOf('vedere'), isNull);
+      expect(manager.stateOf('vision'), isNull);
     });
 
     test('register rejects a duplicate plugin id', () async {
       final manager = _buildManager();
       final manifest = const PluginManifest(
-        id: 'vedere',
+        id: 'vision',
         nameIt: 'Vedere',
-        nameEn: 'See',
+        nameEn: 'Vision',
         version: '1.0.0',
         sdkConstraint: '^0.1.0',
         capabilities: [],
@@ -129,9 +129,9 @@ void main() {
       final manager = _buildManager();
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'sentire',
+          id: 'hearing',
           nameIt: 'Sentire',
-          nameEn: 'Hear',
+          nameEn: 'Hearing',
           version: '1.0.0',
           sdkConstraint: '^0.1.0',
           capabilities: [PluginCapability.microphone],
@@ -139,10 +139,10 @@ void main() {
       );
       await manager.register(plugin);
 
-      await manager.enable('sentire');
+      await manager.enable('hearing');
 
       expect(plugin.calls, ['initialize', 'start']);
-      expect(manager.stateOf('sentire'), PluginState.started);
+      expect(manager.stateOf('hearing'), PluginState.started);
     });
 
     test('enable throws when a capability is not granted', () async {
@@ -151,9 +151,9 @@ void main() {
       );
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'sentire',
+          id: 'hearing',
           nameIt: 'Sentire',
-          nameEn: 'Hear',
+          nameEn: 'Hearing',
           version: '1.0.0',
           sdkConstraint: '^0.1.0',
           capabilities: [PluginCapability.microphone],
@@ -161,7 +161,7 @@ void main() {
       );
       await manager.register(plugin);
 
-      await expectLater(manager.enable('sentire'), throwsStateError);
+      await expectLater(manager.enable('hearing'), throwsStateError);
       expect(plugin.calls, ['initialize']);
     });
 
@@ -169,7 +169,7 @@ void main() {
       final manager = _buildManager();
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'protezione',
+          id: 'safety',
           nameIt: 'Protezione',
           nameEn: 'Safety',
           version: '1.0.0',
@@ -178,20 +178,20 @@ void main() {
         ),
       );
       await manager.register(plugin);
-      await manager.enable('protezione');
+      await manager.enable('safety');
 
-      await manager.disable('protezione');
-      await manager.disable('protezione');
+      await manager.disable('safety');
+      await manager.disable('safety');
 
       expect(plugin.calls, ['initialize', 'start', 'stop']);
-      expect(manager.stateOf('protezione'), PluginState.stopped);
+      expect(manager.stateOf('safety'), PluginState.stopped);
     });
 
     test('unregister stops, disposes, and forgets the plugin', () async {
       final manager = _buildManager();
       final plugin = _RecordingPlugin(
         const PluginManifest(
-          id: 'famiglia',
+          id: 'family',
           nameIt: 'Famiglia',
           nameEn: 'Family',
           version: '1.0.0',
@@ -200,12 +200,12 @@ void main() {
         ),
       );
       await manager.register(plugin);
-      await manager.enable('famiglia');
+      await manager.enable('family');
 
-      await manager.unregister('famiglia');
+      await manager.unregister('family');
 
       expect(plugin.calls, ['initialize', 'start', 'stop', 'dispose']);
-      expect(manager.stateOf('famiglia'), isNull);
+      expect(manager.stateOf('family'), isNull);
       expect(manager.registeredPluginIds, isEmpty);
     });
   });
